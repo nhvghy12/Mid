@@ -23,7 +23,7 @@ export default function PostPage() {
       header["Authorization"] = token;
     }
 
-    fetch("https://jsonplaceholder.typicode.com/posts", {
+    fetch("https://localhost:7133/api/Book", {
       method: "GET",
       headers: header,
     })
@@ -34,6 +34,7 @@ export default function PostPage() {
         setData(json);
       });
   }, [token]);
+  
 
   function onRemoveClicked(event) {
     event.preventDefault();
@@ -92,14 +93,18 @@ export default function PostPage() {
             <tr>
               <th>ID</th>
               <th onClick={handleSort}> {sortType}</th>
-              <th>Action</th>
+              <th>Name</th>
+              <th>Author</th>
+              <th>Summary</th>
             </tr>
           </thead>
           <tbody>
             {searchPosts.map((row) => (
               <tr key={row.id}>
                 <td>{row.id}</td>
-                <td>{row.title}</td>
+                <td>{row.name}</td>
+                <td>{row.author}</td>
+                <td>{row.summary}</td>
                 <td>
                   <div>
                     <Button href={`/posts/${row.id}`} variant="primary">
